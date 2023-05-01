@@ -69,9 +69,6 @@ jobs:
       - name: update sha in k8
         run: sed -i 's/{github.sha}/${{github.sha}}/g' manifests/k8s.yaml
         
-      - name: update sha in k8
-        run: sed -i 's/{nodos}/${{secrets.NODOS}}/g' manifests/k8s.yaml
-
       - name: ls -la 
         run: cat manifests/k8s.yaml
       - uses: okteto/context@2.7.0

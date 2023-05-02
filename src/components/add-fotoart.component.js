@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import FotoService from "../services/fotoart.service";
 import Navbar from "./Navbar.component";
 import "firebase/compat/storage";
+import logo from "../img/logo.jpeg"
 import firebase from "firebase/compat/app";
-import logo from '../img/logo.jpeg';
 export const storage = firebase.storage();
 
 
@@ -23,7 +23,7 @@ export default class AddFotoart extends Component {
       description: "",
       published: false,
       submitted: false,
-      image : null,
+      file : null,
       url: ""
     };
   }
@@ -31,7 +31,7 @@ export default class AddFotoart extends Component {
   onChangeFile(e) {
      console.log(e.target.files[0]);
      this.setState ({
-	image : e.target.files[0],
+	file : e.target.files[0],
      });
   }
 
@@ -101,17 +101,16 @@ export default class AddFotoart extends Component {
     });
   }
 
- // const [image, setFile] = useState(null);
+ // const [file, setFile] = useState(null);
  // const [url, setURL] = useState("");
 
 
   render() { 
  return (
+  <div>
+    <Navbar />
   
-  <div className="container">
-  <Navbar />
-
-  <div className="submit-form">
+      <div className="submit-form">
         {this.state.submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
@@ -135,7 +134,7 @@ export default class AddFotoart extends Component {
             </div>
 
             <div className="form-group">
-              <label  className="des"  htmlFor="description">Description</label>
+              <label className="des" htmlFor="description">Description</label>
               <input
                 type="text"
                 className="form-control"
@@ -171,12 +170,10 @@ export default class AddFotoart extends Component {
           </div>
         )}
       </div>
-      <div className="container" >
-      
-      <img className="ima" src={logo} alt="" />
-
-    </div>
-      </div>
+      <div>
+  <img className="ima" src={logo} alt="" />
+</div>
+     </div>
     );
 
 

@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import '../App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -23,13 +22,13 @@ class Navbar extends Component {
           </motion.a>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/galery"} className="link">
-                Galery
+              <Link to={"/add"} className="link">
+                Add Art
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/add"} className="link2">
-                Add Art
+              <Link to={"/galery"} className="link2">
+                Galery
               </Link>
             </li>
           </div>
@@ -41,4 +40,3 @@ class Navbar extends Component {
 }
 
 export default Navbar;
-

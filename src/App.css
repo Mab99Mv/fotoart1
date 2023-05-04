@@ -105,10 +105,16 @@ top:2px;
     width:87px;
     }
 
+  #title{
+    position:relative;
+left:577px;
+top:296px;
+    width:160px;
+  }
   .title {
     position:relative;
     left:383px;
-    top:206px;
+    top:312px;
   }
 
   .arch {
@@ -117,11 +123,31 @@ top:2px;
     top:-33px;
     }
   
-    .ima {
-      
-      width:200px;
+  .ima {
+      width:250px;
       height:200px;
       position:relative;
-left:385px;
-top:-261px;
+      left:526px;
+      top:-5px;
       }
+      .portada {
+        position:relative;
+        left:244px;
+        top:45px;
+        }
+  .logo {
+        height:87px;
+        position:relative;
+        left:444px;
+        top:359px;
+        border-radius:85px;
+        width:100px;
+        }
+  
+
+  #te {
+    width:250px;
+    position:relative;
+    left:59px;
+    top:71px;
+    }

@@ -1,9 +1,8 @@
-
 import React, { Component } from "react";
 import '../App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Navbar from "./Navbar.component";
-
+import logo from "../img/logo.jpeg"
 
 class Home extends Component {
   
@@ -12,6 +11,7 @@ class Home extends Component {
 
       <div className="container">
        <Navbar/>
+        <img className="portada" src={logo} alt=""/>
          </div>
       
     );
@@ -19,5 +19,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-       

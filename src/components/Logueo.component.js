@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import "../Login.css";
 
 class Logueo extends Component {
   constructor(props) {
@@ -70,16 +71,17 @@ class Logueo extends Component {
 
     return (
       <div>
-        <h1>{isRegistrando ? "Registrate" : "Iniciar sesión"}</h1>
+        <h1 className="titulo">{isRegistrando ? "Registrate" : "Iniciar sesión"}</h1>
         <form onSubmit={this.submitHandler}>
-          <input type="email" id="emailField" />
-          <input type="password" id="passwordField" />
-          <button type="submit">{isRegistrando ? "Registrate" : "Iniciar sesión"}</button>
+          <input type="email" id="emailField" className="inputField" />
+          <input type="password" id="passwordField" className="inputField" />
+          <button type="submit" className="submitButton">{isRegistrando ? "Registrate" : "Iniciar sesión"}</button>
         </form>
-        <button onClick={this.toggleRegistrando}>
+        <button onClick={this.toggleRegistrando} className="toggleButton">
           {isRegistrando ? "¿Ya tienes cuenta? ¡Inicia sesión!" : "¿No tienes cuenta todavía? ¡Registrate gratis!"}
         </button>
-        <button onClick={this.signInWithGoogle}>Iniciar sesión con Google</button>
+        <h1 className="or">or</h1>
+        <button onClick={this.signInWithGoogle} className="googleButton">Iniciar sesión con Google</button>
       </div>
     );
   }

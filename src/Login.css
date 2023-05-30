@@ -1,0 +1,83 @@
+#tab-login {
+    width:200px;
+    left:459px;
+    top:128px;
+    background-color:#fd0da5;
+    position:relative;
+    }
+
+#tab-register {
+    position:relative;
+    width:200px;
+    background-color:#f9f0f0;
+    left:-19px;
+    top:129px;
+    border-radius:3px;
+    }
+
+#emailField {
+    left:501px;
+    top:133px;
+    width:300px;
+    position:relative;
+    }
+
+#passwordField {
+    left:503px;
+    top:136px;
+    width:300px;
+    position:relative;
+    }
+
+#loginCheck {
+    left:466px;
+    top:107px;
+    position:relative;
+    }
+
+#titulo {
+    width:98px;
+    position:relative;
+    left:547px;
+    top:156px;
+    }
+
+#or {
+    width:100px;
+    position:relative;
+    left:590px;
+    top:115px;
+    }
+
+#email {
+    position:relative;
+    left:500px;
+    top:70px;
+    }
+
+#pass {
+    position:relative;
+    left:502px;
+    top:71px;
+    }
+
+#forg {
+    position:relative;
+    left:-138px;
+    top:50px;
+    }
+
+#remenber {
+    position:relative;
+    left:467px;
+    top:106px;
+    }
+
+
+.btn-primary {
+    left:574px;
+    top:101px;
+    width:150px;
+    background-color:#f58ab8;
+    position:relative;
+    }

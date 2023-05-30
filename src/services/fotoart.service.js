@@ -22,8 +22,8 @@ class FotoService {
     return db.collection("imagenes").doc(id).update(value);
   }
 
-  delete(id, imageUrl) {
-    const imageRef = storage.refFromURL(imageUrl);
+  delete(id, imageName) {
+    const imageRef = storage.ref().child('imagenes/' + imageName);
     return imageRef.delete().then(() => {
       return db.collection("imagenes").doc(id).delete();
     });

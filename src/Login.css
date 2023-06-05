@@ -1,0 +1,54 @@
+.titulo {
+    color:#181618;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .inputField {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #df81d3;
+    border-radius: 5px;
+  }
+  
+  .submitButton {
+    padding: 10px 20px;
+    background-color: #df81d3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .toggleButton {
+    color: #df81d3;
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    position:relative;
+    left:679px;
+    top:-57px;
+  }
+  
+  .googleButton {
+    padding: 10px 20px;
+    background-color: #df81d3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position:relative;
+left:120px;
+top:18px;
+  }
+  .or {
+    width:81px;
+    position:relative;
+    left:224px;
+    font-size:20px;
+    }
+
+  
+
+        

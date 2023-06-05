@@ -1,12 +1,9 @@
-import React, { Component } from "react";
-import "firebase/storage";
-import "../App.css";
-import { storage } from "../firebase";
-import Reaction from "./Reacciones.component";
-import FotoService from "../services/fotoart.service";
-import  Comenta from "./Comentarios.component";
-
-import Navbar from "./Navbar.component";
+import React, { Component } from 'react';
+import Reacciones from './Reacciones.component';
+import Comentarios from './Comentarios.component';
+import Navbar from './Navbar.component';
+import FotoService from '../services/fotoart.service';
+import { storage } from '../firebase';
 
 export default class Galery extends Component {
   state = {
@@ -16,47 +13,63 @@ export default class Galery extends Component {
   };
 
   componentDidMount() {
-    const fotosRef = storage.ref().child("imagenes");
-    fotosRef.listAll().then((res) => {
-      const imagenes = [];
-      res.items.forEach((itemRef) => {
-        itemRef.getDownloadURL().then((url) => {
-          if (url && itemRef.name) { // comprobar si itemRef.name no es undefined
-            imagenes.push({
-              id: itemRef.name,
-              url: url,
+    const fotosRef = storage.ref().child('imagenes');
+    fotosRef.listAll()
+      .then((res) => {
+        const imagenes = [];
+        res.items.forEach((itemRef) => {
+          itemRef.getDownloadURL()
+            .then((url) => {
+              if (url && itemRef.name) {
+                imagenes.push({
+                  id: itemRef.name,
+                  url: url,
+                });
+                this.setState({ imagenes });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
             });
-            this.setState({ imagenes });
-          }
-        }).catch((error) => {
-          console.log(error); // manejo de errores
         });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    });
   }
+
   handleDelete = (id) => {
     if (!id) {
-      console.log("ID no válido:", id);
+      console.log('ID no válido:', id);
       return;
     }
-  
+
     this.setState({ eliminandoImagen: true });
-  
-    FotoService.delete(id)
+
+    // Eliminar la imagen de Firebase Storage
+    const imageRef = storage.ref().child(`imagenes/${id}`);
+    imageRef.delete()
       .then(() => {
         const { imagenes } = this.state;
         const newImagenes = imagenes.filter((foto) => foto.id !== id);
         this.setState({ imagenes: newImagenes });
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
       })
       .finally(() => {
         this.setState({ eliminandoImagen: false });
       });
+
+    // Eliminar la imagen de la base de datos
+    FotoService.delete(id)
+      .then(() => {
+        // Actualizar el estado del componente o realizar otras acciones necesarias
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-  
-  
 
   handleImagenClick = (id) => {
     const { imagenes } = this.state;
@@ -80,8 +93,8 @@ export default class Galery extends Component {
                 height="200"
                 onClick={() => this.handleImagenClick(foto.id)}
               />
-              <Reaction />
-              <Comenta />
+              <Reacciones id={foto.id} />
+              <Comentarios id={foto.id} />
               {eliminandoImagen && (
                 <div className="spinner-border" role="status"></div>
               )}

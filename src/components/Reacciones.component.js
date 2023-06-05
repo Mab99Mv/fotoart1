@@ -1,41 +1,115 @@
-import React, { Component } from "react";
-import KafkaService from "../services/kafka.service";
+import '../reacciones.css';
+import KafkaService from '../services/kafka.service';
+import React, { Component } from 'react';
+import axios from 'axios';
 
+class Reacciones extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      reactions: {},
+    };
+    this.uri = 'https://apimo-service-new-mab99mv.cloud.okteto.net'; // Actualiza la URL base aquí
+  }
 
-function saveLike(e, status) {
+  componentDidMount() {
+    this.fetchReactions();
+  }
+  fetchReactions = () => {
+    const { id } = this.props;
   
-     let data = {
-       id: 0,
-       status: status
-     };
+    axios
+      .get(`${this.uri}/reactions/${encodeURIComponent(id)}/count`)
+      .then((response) => {
+        const { count } = response.data;
+        this.setState((prevState) => ({
+          reactions: {
+            ...prevState.reactions,
+            [id]: count,
+          },
+        }));
+      })
+      .catch((error) => {
+        console.log('Error al obtener las reacciones:', error);
+      });
+  };
   
-     console.log(JSON.stringify(data));
-  
-     KafkaService.reaction("i-love-adsoftsito");
-     e.preventDefault();
- }
+  sendReaction = (status) => {
+    const user = localStorage.getItem('user');
+    const data = {
+      userId: user,
+      objectId: this.props.id,
+      reactionId: status,
+    };
+    console.log('Datos de reacción:', data);
+    console.log(JSON.stringify(data));
+    KafkaService.reactionPush(data);
+  };
 
+  reaction = (e, status) => {
+    e.preventDefault();
+    this.sendReaction(status);
+    this.fetchReactions();
+  };
 
+  render() {
+    const { id } = this.props;
+    const { reactions } = this.state;
+    const reactionCount = reactions[id] || 0;
 
-export default class Reaction extends Component {
+    return (
+      <div className="reactions">
+        <div
+          className="reaction reaction-like"
+          onClick={(e) => this.reaction(e, 'like')}
+        >
+          <tool-tip></tool-tip>
+          <p>{reactionCount}</p>
+        </div>
 
-   
-    render(){
-        return(
-            <select className="styleofButtom" defaultValue={"default"}>
-            <option style={{display:"none"}} value="default" >Me gusta</option>
-            <option onClick={(e) => {
-              e.preventDefault();saveLike(e, 1)
-            }} className="styleoflike" value="like" >👍 Me gusta</option>
-            <option className="styleofLoved" value="love" >💖 Me encanta</option>
-            <option className="styleofFun" value="fun" >😂 Me divierte</option>
-            <option className="styleofSad" value="sad" >😭 Me entristece</option>
-            <option className="styleofAngry" value="angry" >😡 Me enoja</option>
-            
-          
-              </select>
+        <div
+          className="reaction reaction-love"
+          onClick={(e) => this.reaction(e, 'love')}
+        >
+          <tool-tip></tool-tip>
+          <p>{reactionCount}</p>
+        </div>
 
-          
-        )
-    }
+        <div
+          className="reaction reaction-haha"
+          onClick={(e) => this.reaction(e, 'haha')}
+        >
+          <tool-tip></tool-tip>
+          <p>{reactionCount}</p>
+        </div>
+
+        <div
+          className="reaction reaction-wow"
+          onClick={(e) => this.reaction(e, 'wow')}
+        >
+          <tool-tip></tool-tip>
+          <p>{reactionCount}</p>
+        </div>
+
+        <div
+          className="reaction reaction-sad"
+          onClick={(e) => this.reaction(e, 'sad')}
+        >
+          <tool-tip></tool-tip>
+          <p>{reactionCount}</p>
+        </div>
+
+        <div
+          className="reaction reaction-angry"
+          onClick={(e) => this.reaction(e, 'angry')}
+        >
+          <tool-tip></tool-tip>
+          <p>{reactionCount}</p>
+        </div>
+      </div>
+    );
+  }
 }
+
+export default Reacciones;
+
